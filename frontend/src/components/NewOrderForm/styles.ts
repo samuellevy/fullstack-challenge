@@ -80,3 +80,17 @@ export const CloseButon = styled.button`
     color: #000;
   }
 `;
+
+export const SubmitBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const SubmitButton = styled.button`
+  padding: 10px 12px;
+  background: ${colors.primary};
+  color: ${colors.white};
+  border-radius: 4px;
+  cursor: pointer;
+`;
