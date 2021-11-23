@@ -24,7 +24,7 @@ export class CategoriesService {
     return await this.categoryRepository.update(id, category);
   }
 
-  async remove(id: number) {
+  async remove(id: number): Promise<DeleteResult> {
     return await this.categoryRepository.delete(id);
   }
 }
