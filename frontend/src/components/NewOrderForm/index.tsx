@@ -8,11 +8,22 @@ import {
   DetailItem,
 } from './styles';
 
-const NewOrderForm: React.FC = () => {
+interface INewOrderForm {
+  active: boolean;
+  // data: IOrder;
+  closeCallbackFunction: () => void;
+}
+
+const NewOrderForm: React.FC<INewOrderForm> = ({
+  active,
+  closeCallbackFunction,
+}: INewOrderForm) => {
   return (
-    <Container>
+    <Container active={active}>
       <NewOrderBox>
-        <CloseButon>×</CloseButon>
+        <CloseButon onClick={() => closeCallbackFunction()} type="button">
+          ×
+        </CloseButon>
         <DetailItem>
           <strong>Contact Name</strong>
           <input />

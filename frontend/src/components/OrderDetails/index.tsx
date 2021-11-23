@@ -23,7 +23,9 @@ const OrderDetails: React.FC<IOrderDetails> = ({
   return (
     <Container active={active}>
       <OrderDetailsBox>
-        <CloseButon onClick={() => closeCallbackFunction()}>×</CloseButon>
+        <CloseButon onClick={() => closeCallbackFunction()} type="button">
+          ×
+        </CloseButon>
         <DetailItem>
           <strong>Contact Name</strong>
           <span>{data.contactName}</span>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IOrder } from '../../dtos/IOrder';
+import NewOrderForm from '../NewOrderForm';
 import OrderDetails from '../OrderDetails';
 
 import {
@@ -15,6 +16,7 @@ import {
 
 const Orders: React.FC = () => {
   const [isOrderDetailsActive, setIsOrderDetailsActive] = useState(false);
+  const [isNewOrderFormActive, setIsNewOrderFormActive] = useState(false);
   const [orders, setOrders] = useState<IOrder[]>([]);
   const [orderSelected, setOrderSelected] = useState<IOrder>({} as IOrder);
 
@@ -53,10 +55,18 @@ const Orders: React.FC = () => {
     setIsOrderDetailsActive(false);
   };
 
+  const handleNewOrderForm = () => {
+    setIsNewOrderFormActive(true);
+  };
+
+  const handleCloseNewOrderForm = () => {
+    setIsNewOrderFormActive(false);
+  };
+
   return (
     <>
       <Container>
-        <Button>Open new order</Button>
+        <Button onClick={() => handleNewOrderForm()}>Open new order</Button>
         <TableBox>
           <TableHeader>
             <tr>
@@ -89,7 +99,10 @@ const Orders: React.FC = () => {
         data={orderSelected}
         closeCallbackFunction={() => handleCloseOrderDetails()}
       />
-      {/* <NewOrderForm /> */}
+      <NewOrderForm
+        active={isNewOrderFormActive}
+        closeCallbackFunction={() => handleCloseNewOrderForm()}
+      />
     </>
   );
 };

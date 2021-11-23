@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 import { colors } from '../../styles';
 
-export const Container = styled.div`
+interface IContainer {
+  active: boolean;
+}
+
+export const Container = styled.div<IContainer>`
+  display: ${props => (props.active ? 'flex' : 'none')};
   position: absolute;
   top: 0;
   left: 0;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
