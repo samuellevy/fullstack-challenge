@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { OrdersContext } from '../../context/orders';
 import { IOrder } from '../../dtos/IOrder';
 import NewOrderForm from '../NewOrderForm';
 import OrderDetails from '../OrderDetails';
@@ -19,32 +20,11 @@ const Orders: React.FC = () => {
   const [isNewOrderFormActive, setIsNewOrderFormActive] = useState(false);
   const [orders, setOrders] = useState<IOrder[]>([]);
   const [orderSelected, setOrderSelected] = useState<IOrder>({} as IOrder);
+  const ordersContext = useContext(OrdersContext);
 
   useEffect(() => {
-    setOrders([
-      {
-        id: 1,
-        contactName: 'João',
-        contactPhone: '99999999',
-        agency: 'Agencia 1',
-        orderDescription:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        category: 'cat 1',
-        company: 'string',
-        deadline: '22/12/2021',
-      },
-      {
-        id: 2,
-        contactName: 'João',
-        contactPhone: '99999999',
-        agency: 'Agencia 1',
-        orderDescription: 'Descrição do pedido',
-        category: 'cat 1',
-        company: 'string',
-        deadline: '22/12/2021',
-      },
-    ]);
-  }, []);
+    setOrders(ordersContext.state.orders);
+  }, [ordersContext.state]);
 
   const handleOrderDetails = (order: IOrder) => {
     setOrderSelected(order);

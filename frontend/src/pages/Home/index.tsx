@@ -1,15 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import NewOrderForm from '../../components/NewOrderForm';
-import OrderDetails from '../../components/OrderDetails';
+import React, { useContext, useEffect, useState } from 'react';
 import Orders from '../../components/Orders';
-import { IOrder } from '../../dtos/IOrder';
 
 import logo from '../../assets/logo-2.png';
 
 import { Container, Header } from './styles';
+import api from '../../services/api';
+import { OrdersContext } from '../../context/orders';
 
 const Home: React.FC = () => {
-  useEffect(() => {}, []);
+  const ordersContext = useContext(OrdersContext);
+
+  const getData = async () => {
+    const response = await api.get('http://localhost:3333/orders');
+
+    ordersContext.dispatch({
+      type: 'SET_ORDERS',
+      payload: response.data,
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <Container>
