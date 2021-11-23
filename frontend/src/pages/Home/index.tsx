@@ -4,14 +4,18 @@ import OrderDetails from '../../components/OrderDetails';
 import Orders from '../../components/Orders';
 import { IOrder } from '../../dtos/IOrder';
 
-import { Container } from './styles';
+import logo from '../../assets/logo-2.png';
+
+import { Container, Header } from './styles';
 
 const Home: React.FC = () => {
   useEffect(() => {}, []);
 
   return (
     <Container>
-      <h1>Home</h1>
+      <Header>
+        <img src={logo} alt="Logo" />
+      </Header>
       <Orders />
     </Container>
   );
