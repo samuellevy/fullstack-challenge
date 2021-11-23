@@ -1,4 +1,5 @@
 import React from 'react';
+import { IOrder } from '../../dtos/IOrder';
 
 import {
   Container,
@@ -8,47 +9,52 @@ import {
   DetailItem,
 } from './styles';
 
-const OrderDetails: React.FC = () => {
+interface IOrderDetails {
+  active: boolean;
+  data: IOrder;
+  closeCallbackFunction: () => void;
+}
+
+const OrderDetails: React.FC<IOrderDetails> = ({
+  active,
+  data,
+  closeCallbackFunction,
+}: IOrderDetails) => {
   return (
-    <Container>
+    <Container active={active}>
       <OrderDetailsBox>
-        <CloseButon>×</CloseButon>
+        <CloseButon onClick={() => closeCallbackFunction()}>×</CloseButon>
         <DetailItem>
           <strong>Contact Name</strong>
-          <span>Alcides</span>
+          <span>{data.contactName}</span>
         </DetailItem>
         <DetailItem>
           <strong>Contact Phone</strong>
-          <span>Alcides</span>
+          <span>{data.contactPhone}</span>
         </DetailItem>
         <DetailItem>
           <strong>Real Estate Agency</strong>
-          <span>Alcides</span>
+          <span>{data.agency}</span>
         </DetailItem>
 
         <DetailItemDescription>
           <strong>Order Description</strong>
-          <span>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </span>
+          <span>{data.orderDescription}</span>
         </DetailItemDescription>
 
         <DetailItem>
-          <strong>Real Estate Agency</strong>
-          <span>Alcides</span>
+          <strong>Company</strong>
+          <span>{data.company}</span>
         </DetailItem>
 
         <DetailItem>
-          <strong>Real Estate Agency</strong>
-          <span>Alcides</span>
+          <strong>Category</strong>
+          <span>{data.category}</span>
         </DetailItem>
 
         <DetailItem>
-          <strong>Real Estate Agency</strong>
-          <span>Alcides</span>
+          <strong>Deadline</strong>
+          <span>{data.deadline}</span>
         </DetailItem>
       </OrderDetailsBox>
     </Container>

@@ -1,15 +1,11 @@
 import styled from 'styled-components';
 import { colors } from '../../styles';
 
-interface IContainer {
-  active: boolean;
-}
-
-export const Container = styled.div<IContainer>`
-  display: ${props => (props.active ? 'flex' : 'none')};
+export const Container = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -18,7 +14,7 @@ export const Container = styled.div<IContainer>`
   background-color: #000000aa;
 `;
 
-export const OrderDetailsBox = styled.article`
+export const NewOrderBox = styled.form`
   display: flex;
   width: 900px;
   justify-content: space-between;
@@ -35,6 +31,25 @@ export const DetailItem = styled.div`
   min-width: 33%;
   max-width: 66%;
   padding: 20px;
+
+  input,
+  select,
+  option {
+    display: inline-block;
+    margin: 8px 0;
+    padding: 8px;
+    background-color: transparent;
+    border: 1px solid #e3e3e3;
+  }
+
+  textarea {
+    display: inline-block;
+    margin: 8px 0;
+    padding: 8px;
+    background-color: transparent;
+    border: 1px solid #e3e3e3;
+    height: 150px;
+  }
 `;
 
 export const DetailItemDescription = styled(DetailItem)`

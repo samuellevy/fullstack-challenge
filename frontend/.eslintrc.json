@@ -51,7 +51,8 @@
     "react/no-unescaped-entities": "off",
     "react/prop-types": "off",
     "no-return-assign": "off",
-    "prettier/prettier": ["error", {"endOfLine": "auto"}]
+    "prettier/prettier": ["error", {"endOfLine": "auto"}],
+    "@typescript-eslint/no-empty-function": "off"
   },
   "settings": {
     "import/resolver": {
