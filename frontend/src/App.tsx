@@ -3,13 +3,13 @@ import Home from './pages/Home';
 
 import { GlobalStyles } from './styles';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <GlobalStyles />
-      <Home/>
+      <Home />
     </div>
   );
-}
+};
 
 export default App;

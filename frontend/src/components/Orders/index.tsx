@@ -8,6 +8,6 @@ const Orders: React.FC = () => {
       <h1>Orders</h1>
     </Container>
   );
-}
+};
 
 export default Orders;
