@@ -1,27 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Orders from '../../components/Orders';
 
 import logo from '../../assets/logo-2.png';
 
 import { Container, Header } from './styles';
 import api from '../../services/api';
-import { OrdersContext } from '../../context/orders';
+import { useOrders } from '../../context/orders';
 
 const Home: React.FC = () => {
-  const ordersContext = useContext(OrdersContext);
+  const { setOrders } = useOrders();
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     const response = await api.get('http://localhost:3333/orders');
-
-    ordersContext.dispatch({
-      type: 'SET_ORDERS',
-      payload: response.data,
-    });
-  };
+    return response.data;
+  }, []);
 
   useEffect(() => {
-    getData();
-  }, []);
+    getData().then(setOrders);
+  }, [getData, setOrders]);
 
   return (
     <Container>
