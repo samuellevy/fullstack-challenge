@@ -117,7 +117,7 @@ const NewOrderForm: React.FC<INewOrderForm> = ({
           <select name="category" onChange={handleChange}>
             <option>Select</option>
             {categories.map((category: ICategory) => (
-              <option key={category.id} value={category.id}>
+              <option key={category.id} value={category.name}>
                 {category.name}
               </option>
             ))}
