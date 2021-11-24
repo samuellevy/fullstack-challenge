@@ -2,6 +2,7 @@ import { useCallback, useContext } from 'react';
 import { OrdersContext } from '../context';
 import { ORDERS_ACTIONS } from '../constants/actions';
 import { IOrder } from '../../../dtos/IOrder';
+import { ICategory } from '../../../dtos/ICategory';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useOrders = (): any => {
@@ -12,6 +13,16 @@ export const useOrders = (): any => {
       dispatch({
         type: ORDERS_ACTIONS.SET_ORDERS,
         payload: orders,
+      });
+    },
+    [dispatch],
+  );
+
+  const setCategories = useCallback(
+    (categories: ICategory[]) => {
+      dispatch({
+        type: ORDERS_ACTIONS.SET_CATEGORIES,
+        payload: categories,
       });
     },
     [dispatch],
@@ -43,6 +54,7 @@ export const useOrders = (): any => {
     addOrder,
     deleteOrder,
     updateOrder,
+    setCategories,
     ...state,
   };
 };

@@ -8,7 +8,13 @@ export const useOrderService = (): any => {
     return response.data;
   }, []);
 
+  const getCategories = useCallback(async () => {
+    const response = await api.get('http://localhost:3333/categories');
+    return response.data;
+  }, []);
+
   return {
     getOrders,
+    getCategories,
   };
 };

@@ -5,6 +5,7 @@ import { ordersReducer } from './reducer';
 
 interface IState {
   orders: IOrder[];
+  categories: string[];
 }
 interface IModel {
   state: IState;

@@ -10,6 +10,11 @@ export const ordersReducer = (state = ordersInitialState, action: any): any => {
         ...state,
         orders: action.payload,
       };
+    case ORDERS_ACTIONS.SET_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload,
+      };
     default:
       return state;
   }

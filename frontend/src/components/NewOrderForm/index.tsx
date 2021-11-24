@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useOrders } from '../../context/orders';
+import { ICategory } from '../../dtos/ICategory';
 import api from '../../services/api';
 
 import { useOrderService } from '../../services/orders';
@@ -33,8 +34,18 @@ const NewOrderForm: React.FC<INewOrderForm> = ({
     deadline: '',
   });
 
-  const { setOrders } = useOrders();
-  const { getOrders } = useOrderService();
+  const mask = (value: string) => {
+    const maskedValue = value
+      .replace(/\D/g, '')
+      .replace(/(\d{2})(\d)/, '($1) $2')
+      .replace(/(\d{4})(\d)/, '$1-$2')
+      .replace(/(-\d{5})\d+?$/, '$1');
+
+    return maskedValue;
+  };
+
+  const { setOrders, setCategories, categories } = useOrders();
+  const { getOrders, getCategories } = useOrderService();
 
   const handleChange = (
     event: React.ChangeEvent<
@@ -42,7 +53,10 @@ const NewOrderForm: React.FC<INewOrderForm> = ({
     >,
   ) => {
     const { name, value } = event.target;
-    setOrderForm({ ...orderForm, [name]: value });
+    setOrderForm({
+      ...orderForm,
+      [name]: name === 'contactPhone' ? mask(value) : value,
+    });
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -51,6 +65,10 @@ const NewOrderForm: React.FC<INewOrderForm> = ({
     closeCallbackFunction();
     getOrders().then(setOrders);
   };
+
+  useEffect(() => {
+    getCategories().then(setCategories);
+  }, [getCategories, setCategories]);
 
   return (
     <Container active={active}>
@@ -64,7 +82,11 @@ const NewOrderForm: React.FC<INewOrderForm> = ({
         </DetailItem>
         <DetailItem>
           <strong>Contact Phone</strong>
-          <input name="contactPhone" onChange={handleChange} />
+          <input
+            name="contactPhone"
+            onChange={handleChange}
+            value={orderForm.contactPhone}
+          />
         </DetailItem>
         <DetailItem>
           <strong>Real Estate Agency</strong>
@@ -85,8 +107,11 @@ const NewOrderForm: React.FC<INewOrderForm> = ({
           <strong>Select the order category</strong>
           <select name="category" onChange={handleChange}>
             <option>Select</option>
-            <option>Option 1</option>
-            <option>Option 2</option>
+            {categories.map((category: ICategory) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
           </select>
         </DetailItem>
 
