@@ -105,3 +105,16 @@ You can execute `npm run start:prod` using a Node container.
   Or
 - use `yarn global add serve`
 - `serve -s build`
+
+## TODO
+
+To implements an `authentication layer`, we could do:
+
+- Create context to `user`
+- Create `users` module in nestjs
+- Create `auth` module in backend
+- Login in backend should return a JWT Token
+- We can request to a login route in backend
+- Backend should return a JWT Token
+- We store this token in `localStorage`
+- And we could verify if user is logged in frontend
