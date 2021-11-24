@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useOrders } from '../../context/orders';
+import api from '../../services/api';
+
+import { useOrderService } from '../../services/orders';
 
 import {
   Container,
@@ -12,7 +16,6 @@ import {
 
 interface INewOrderForm {
   active: boolean;
-  // data: IOrder;
   closeCallbackFunction: () => void;
 }
 
@@ -30,6 +33,9 @@ const NewOrderForm: React.FC<INewOrderForm> = ({
     deadline: '',
   });
 
+  const { setOrders } = useOrders();
+  const { getOrders } = useOrderService();
+
   const handleChange = (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -39,14 +45,12 @@ const NewOrderForm: React.FC<INewOrderForm> = ({
     setOrderForm({ ...orderForm, [name]: value });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(orderForm);
+    await api.post('/orders', orderForm);
+    closeCallbackFunction();
+    getOrders().then(setOrders);
   };
-
-  useEffect(() => {
-    console.log(orderForm);
-  }, [orderForm]);
 
   return (
     <Container active={active}>

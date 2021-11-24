@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { OrdersContext } from '../../context/orders';
+import React, { useState } from 'react';
+import { useOrders } from '../../context/orders';
 import { IOrder } from '../../dtos/IOrder';
 import NewOrderForm from '../NewOrderForm';
 import OrderDetails from '../OrderDetails';
@@ -18,13 +18,8 @@ import {
 const Orders: React.FC = () => {
   const [isOrderDetailsActive, setIsOrderDetailsActive] = useState(false);
   const [isNewOrderFormActive, setIsNewOrderFormActive] = useState(false);
-  const [orders, setOrders] = useState<IOrder[]>([]);
   const [orderSelected, setOrderSelected] = useState<IOrder>({} as IOrder);
-  const ordersContext = useContext(OrdersContext);
-
-  useEffect(() => {
-    setOrders(ordersContext.state.orders);
-  }, [ordersContext.state]);
+  const { orders } = useOrders();
 
   const handleOrderDetails = (order: IOrder) => {
     setOrderSelected(order);
@@ -59,7 +54,7 @@ const Orders: React.FC = () => {
           </TableHeader>
 
           <TableBody>
-            {orders.map(order => (
+            {orders.map((order: IOrder) => (
               <TableBodyLine
                 key={order.id}
                 onClick={() => handleOrderDetails(order)}

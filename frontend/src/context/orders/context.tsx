@@ -1,14 +1,25 @@
-import React, { createContext, useReducer } from 'react';
-import { ordersInitialState, ordersModel } from './constants/model';
+import React, { createContext, Dispatch, useReducer } from 'react';
+import { IOrder } from '../../dtos/IOrder';
+import { ordersInitialState } from './constants/model';
 import { ordersReducer } from './reducer';
 
-export const OrdersContext = createContext(ordersModel);
+interface IState {
+  orders: IOrder[];
+}
+interface IModel {
+  state: IState;
+  dispatch: Dispatch<unknown>;
+}
+
+export const OrdersContext = createContext({} as IModel);
 
 interface IOrdersProviderProps {
   children: React.ReactNode;
 }
 
-export const OrdersProvider = ({ children }: IOrdersProviderProps) => {
+export const OrdersProvider = ({
+  children,
+}: IOrdersProviderProps): React.ReactElement => {
   const [state, dispatch] = useReducer(ordersReducer, ordersInitialState);
 
   return (

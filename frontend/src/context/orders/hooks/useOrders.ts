@@ -1,17 +1,21 @@
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { OrdersContext } from '../context';
 import { ORDERS_ACTIONS } from '../constants/actions';
 import { IOrder } from '../../../dtos/IOrder';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useOrders = (): any => {
-  const { dispatch } = useContext(OrdersContext);
+  const { state, dispatch } = useContext(OrdersContext);
 
-  const setOrders = (orders: IOrder[]) => {
-    dispatch({
-      type: ORDERS_ACTIONS.SET_ORDERS,
-      payload: orders,
-    });
-  };
+  const setOrders = useCallback(
+    (orders: IOrder[]) => {
+      dispatch({
+        type: ORDERS_ACTIONS.SET_ORDERS,
+        payload: orders,
+      });
+    },
+    [dispatch],
+  );
 
   const addOrder = (order: IOrder) => {
     dispatch({
@@ -39,5 +43,6 @@ export const useOrders = (): any => {
     addOrder,
     deleteOrder,
     updateOrder,
+    ...state,
   };
 };

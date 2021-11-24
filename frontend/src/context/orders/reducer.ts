@@ -1,4 +1,5 @@
-import { IOrder } from '../../dtos/IOrder';
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ORDERS_ACTIONS } from './constants/actions';
 import { ordersInitialState } from './constants/model';
 
