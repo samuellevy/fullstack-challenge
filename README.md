@@ -1,16 +1,14 @@
-# Refera - Fullstack Code Challenge
+# READ ME
+
+## Abstract
+
+This project was made for applying on a test for Refera.
 
 ## Description
 
 Welcome to Refera's Fullstack code challenge! The goal of this challenge is to create a web application to manage maintanence orders from Refera, following the **Acceptance criteria**. The frontend of application has only one page and the backend contains a simple REST API service and has a connection with a database. By the end of the challenge, we will be able to create new orders and list them through the web application that comunicates with our backend service to read and store the data in a database.
 
 We use React and Django in our real application, feel comfortable to chose the appropriate technology you are familiar with. Elaborate briefly the architectural decisions, design patterns and frameworks you used on your solution.
-
-
-## Resources
-
-![image](https://user-images.githubusercontent.com/10841710/141149769-d2bef978-7073-4ac7-b0af-6c0c8c7b6fe8.png)
-
 
 ## Acceptance criteria
 
@@ -26,7 +24,7 @@ We use React and Django in our real application, feel comfortable to chose the a
 - Database to store data from the following resources
   - Order
   - Category
-- Describe how you would structure the database to account for 
+- Describe how you would structure the database to account for
   - Real estate agency registration data
   - Company registration data
   - Contact registration data
@@ -41,8 +39,69 @@ We use React and Django in our real application, feel comfortable to chose the a
   - Save button to hit backend service and store the data
 - Modal to read only the order details
 
-## Additional Information
+## What did I used?
 
-- The usage of git will be taken into consideration on the evaluation
-- Fork this repository to your github account to submit your code
-- All the written information requested on **Acceptance criteria** should be added on a README.md file inside the repository
+### Frontend
+
+- Reactjs
+- Context api
+- Custom hooks
+- Styled-components
+- Axios
+
+### Backend
+
+- Nestjs
+- TypeORM
+
+### Database
+
+- SQLite
+
+## Installation
+
+Clone this repository  
+`https://github.com/samuellevy/fullstack-challenge`
+
+Install project dependencies
+
+- For backend
+  `cd backend && yarn`
+- For frontend
+  `cd frontend && yarn`
+
+## Usage manuals
+
+- [Frontend](frontend/README.md)
+- [Backend](backend/README.md)
+
+## How to run?
+
+**Alternative 1**
+
+- Open your terminal and execute  
+  `sh install.sh && sh run.sh`
+
+**Alternative 2**
+
+- Open this folder in a terminal and execute  
+  `cd backend && yarn start:dev`
+- Open this folder in another terminal and execute  
+  `cd frontend && yarn run`
+
+## For production
+
+**Backend**  
+You can execute `npm run start:prod` using a Node container.
+
+**Frontend**  
+**STEP 1**
+
+- Execute `yarn build`
+
+**STEP 2**
+
+- You can use `build/` folder has created and send to a server  
+  Or
+- use `yarn global add serve`
+- `serve -s build`
