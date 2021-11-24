@@ -1,8 +1,9 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
 import { OrdersProvider } from './context/orders';
 import Home from './pages/Home';
-
 import { GlobalStyles } from './styles';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const App: React.FC = () => {
       <OrdersProvider>
         <Home />
       </OrdersProvider>
+      <ToastContainer />
     </div>
   );
 };

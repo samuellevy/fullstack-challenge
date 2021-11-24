@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useOrders } from '../../context/orders';
 import { ICategory } from '../../dtos/ICategory';
+import { IOrder } from '../../dtos/IOrder';
 import api from '../../services/api';
 
 import { useOrderService } from '../../services/orders';
@@ -24,7 +26,7 @@ const NewOrderForm: React.FC<INewOrderForm> = ({
   active,
   closeCallbackFunction,
 }: INewOrderForm) => {
-  const [orderForm, setOrderForm] = useState({
+  const initialOrderForm: Partial<IOrder> = {
     contactName: '',
     contactPhone: '',
     agency: '',
@@ -32,7 +34,8 @@ const NewOrderForm: React.FC<INewOrderForm> = ({
     company: '',
     category: '',
     deadline: '',
-  });
+  };
+  const [orderForm, setOrderForm] = useState(initialOrderForm);
 
   const mask = (value: string) => {
     const maskedValue = value
@@ -61,9 +64,15 @@ const NewOrderForm: React.FC<INewOrderForm> = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await api.post('/orders', orderForm);
-    closeCallbackFunction();
-    getOrders().then(setOrders);
+    try {
+      await api.post('/orders', orderForm);
+      closeCallbackFunction();
+      toast('Order created!');
+      getOrders().then(setOrders);
+      setOrderForm(initialOrderForm);
+    } catch (err) {
+      toast('Error creating order');
+    }
   };
 
   useEffect(() => {
